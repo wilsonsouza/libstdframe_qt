@@ -1,5 +1,26 @@
-#include "libstdframe_qt.h"
-
-libstdframe_qt::libstdframe_qt()
+//-----------------------------------------------------------------------------------------------//
+// libstdframe_qt Multiplatform C++14
+//
+// Created by Wilson.Souza 2018
+// 
+//
+// Copyright (C) 2018 WR DevInfo
+// 
+//-----------------------------------------------------------------------------------------------//
+#include <libstdframe_qt.h>
+//-----------------------------------------------------------------------------------------------//
+namespace std
 {
+   namespace version
+   {
+      Q_DECL_EXPORT unicodestring const __cdecl get_string_version()
+      {
+         return "1.1.2018";
+      }
+      //-----------------------------------------------------------------------------------------------//
+      Q_DECL_EXPORT uint32_t const __cdecl get_version()
+      {
+         return (1 << 1) | (1 << 1) | (1 << 2) | (1 << 0) | (1 << 1) | (1 << 8);
+      }
+   }
 }

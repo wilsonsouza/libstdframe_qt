@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------------------------//
-// stdx.frame.x86 for Windows
+// dedaluslib.lib for Windows
 //
 // Created by Wilson.Souza 2012, 2018
-// For 
+// For Libbs Farma
 //
-// WR Developer
-// (c) 2012, 2013, 2014, 2015, 2018
-//
-// Last updated: introduce new features of c++14
+// Dedalus Prime
+// (c) 2012
 //-----------------------------------------------------------------------------------------------//
 #pragma once
-#include <std.defs.hpp>
+#include <std.menu.hpp>
+#include <std.popup.hpp>
+//-----------------------------------------------------------------------------------------------//

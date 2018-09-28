@@ -53,7 +53,7 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_PRINTSUPPORT_LIB;QT_SQL_LIB;QT_WIDGETS_LIB;LIBSTDFRAME_QT_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -66,6 +66,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5PrintSupportd.lib;Qt5Sqld.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <QtMoc>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_PRINTSUPPORT_LIB;QT_SQL_LIB;QT_WIDGETS_LIB;LIBSTDFRAME_QT_LIB;BUILD_STATIC</Define>
+      <IncludePath>C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+    </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -83,11 +89,229 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5PrintSupport.lib;Qt5Sql.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <QtMoc>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_PRINTSUPPORT_LIB;QT_SQL_LIB;QT_WIDGETS_LIB;LIBSTDFRAME_QT_LIB;BUILD_STATIC</Define>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+    </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="libstdframe_qt.cpp" />
+    <ClCompile Include="source\std.dialog_about.cpp" />
+    <ClCompile Include="source\std.action.cpp" />
+    <ClCompile Include="source\std.analyzeritems.cpp" />
+    <ClCompile Include="source\std.application.cpp" />
+    <ClCompile Include="source\std.button.cpp" />
+    <ClCompile Include="source\std.checkbox.cpp" />
+    <ClCompile Include="source\std.combobox.cpp" />
+    <ClCompile Include="source\std.connectedwizard.cpp" />
+    <ClCompile Include="source\std.control.cpp" />
+    <ClCompile Include="source\std.defs.cpp" />
+    <ClCompile Include="source\std.dialog.cpp" />
+    <ClCompile Include="source\std.dialog_login.cpp" />
+    <ClCompile Include="source\std.dialog_search.cpp" />
+    <ClCompile Include="source\std.displayprogressbar.cpp" />
+    <ClCompile Include="source\std.dockwindow.cpp" />
+    <ClCompile Include="source\std.edititems.cpp" />
+    <ClCompile Include="source\std.fileitems.cpp" />
+    <ClCompile Include="source\std.gettingicondataonresourcefile.cpp" />
+    <ClCompile Include="source\std.groupbox.cpp" />
+    <ClCompile Include="source\std.groupboxbuttonscontrol.cpp" />
+    <ClCompile Include="source\std.groupboxtopbuttoncontrol.cpp" />
+    <ClCompile Include="source\std.helplibbsitems.cpp" />
+    <ClCompile Include="source\std.helpwrdeveloperinfoitems.cpp" />
+    <ClCompile Include="source\std.hiperlink.cpp" />
+    <ClCompile Include="source\std.icondata.cpp" />
+    <ClCompile Include="source\std.panel.cpp" />
+    <ClCompile Include="source\std.label.cpp" />
+    <ClCompile Include="source\std.linedate.cpp" />
+    <ClCompile Include="source\std.lineedit.cpp" />
+    <ClCompile Include="source\std.linegroup.cpp" />
+    <ClCompile Include="source\std.mainwindow.cpp" />
+    <ClCompile Include="source\std.mdichildwindow.cpp" />
+    <ClCompile Include="source\std.mdiframewindow.cpp" />
+    <ClCompile Include="source\std.mdiframewindowarea.cpp" />
+    <ClCompile Include="source\std.menu.cpp" />
+    <ClCompile Include="source\std.menubar.cpp" />
+    <ClCompile Include="source\std.menuitemdata.cpp" />
+    <ClCompile Include="source\std.menuitems.cpp" />
+    <ClCompile Include="source\std.popup.cpp" />
+    <ClCompile Include="source\std.progressbar.cpp" />
+    <ClCompile Include="source\std.puttingicondataonresourcefile.cpp" />
+    <ClCompile Include="source\std.radiobutton.cpp" />
+    <ClCompile Include="source\std.radiogroup.cpp" />
+    <ClCompile Include="source\std.ras.cpp" />
+    <ClCompile Include="source\std.resource.compiler.cpp" />
+    <ClCompile Include="source\std.resource.cpp" />
+    <ClCompile Include="source\std.resource.data.cpp" />
+    <ClCompile Include="source\std.resource.header.cpp" />
+    <ClCompile Include="source\std.resource.icon.cpp" />
+    <ClCompile Include="source\std.searchwidgetcontrol.cpp" />
+    <ClCompile Include="source\std.sspi.cpp" />
+    <ClCompile Include="source\std.statusbar.cpp" />
+    <ClCompile Include="source\std.styleitems.cpp" />
+    <ClCompile Include="source\std.submenuitemdata.cpp" />
+    <ClCompile Include="source\std.tabbed.cpp" />
+    <ClCompile Include="source\std.tabbedmenuitems.cpp" />
+    <ClCompile Include="source\std.table.cpp" />
+    <ClCompile Include="source\std.tabledelegate.cpp" />
+    <ClCompile Include="source\std.tablewidgetmenuitems.cpp" />
+    <ClCompile Include="source\std.textedit.cpp" />
+    <ClCompile Include="source\std.timer.cpp" />
+    <ClCompile Include="source\std.toolbar.cpp" />
+    <ClCompile Include="source\std.toolbox.cpp" />
+    <ClCompile Include="source\std.toolbutton.cpp" />
+    <ClCompile Include="source\std.toolsitems.cpp" />
+    <ClCompile Include="source\std.treeview.cpp" />
+    <ClCompile Include="source\std.treewidget.cpp" />
+    <ClCompile Include="source\std.treewidgetitem.cpp" />
+    <ClCompile Include="source\std.unicodestring.cpp" />
+    <ClCompile Include="source\std.useritems.cpp" />
+    <ClCompile Include="source\std.viewitems.cpp" />
+    <ClCompile Include="source\std.widget.cpp" />
+    <ClCompile Include="source\std.widgeticon.cpp" />
+    <ClCompile Include="source\std.windowitems.cpp" />
+    <ClCompile Include="source\std.winsys.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="include\std.dialog_about.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="include\std.action.hpp" />
+    <QtMoc Include="include\std.application.hpp" />
+    <QtMoc Include="include\std.button.hpp" />
+    <ClInclude Include="include\std.captions.hpp" />
+    <QtMoc Include="include\std.checkbox.hpp" />
+    <QtMoc Include="include\std.combobox.hpp" />
+    <ClInclude Include="include\std.common.hpp" />
+    <ClInclude Include="include\std.connected_wizard.hpp" />
+    <ClInclude Include="include\std.controls.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </ClInclude>
+    <ClInclude Include="include\std.defs.hpp" />
+    <ClInclude Include="include\std.defsx.hpp" />
+    <QtMoc Include="include\std.dialog.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="include\std.dialog_login.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="include\std.dialog_search.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="include\std.display_progressbar.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="include\std.dockwindow.hpp" />
+    <ClInclude Include="include\std.formatqueryfieldstoalias.hpp" />
+    <ClInclude Include="include\std.generate_container_mapper.hpp" />
+    <ClInclude Include="include\std.gettingicondataonresourcefile.hpp" />
+    <QtMoc Include="include\std.groupbox.hpp" />
+    <ClInclude Include="include\std.groupbox_buttons_control.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </ClInclude>
+    <ClInclude Include="include\std.groupbox_impl.hpp" />
+    <QtMoc Include="include\std.groupbox_top_button_control.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <ClInclude Include="include\std.groupbox_widget_impl.hpp" />
+    <ClInclude Include="include\std.hiperlink.hpp" />
+    <ClInclude Include="include\std.icondata.hpp" />
+    <ClInclude Include="include\std.icons.hpp" />
+    <ClInclude Include="include\std.dialog_impl.hpp" />
+    <ClInclude Include="include\std.mainwindow_impl.hpp" />
+    <ClInclude Include="include\std.mdichildwindow_impl.hpp" />
+    <ClInclude Include="include\std.panel.hpp" />
+    <ClInclude Include="include\std.widget_impl.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </ClInclude>
+    <QtMoc Include="include\std.label.hpp" />
+    <ClInclude Include="include\std.labelmodels.hpp" />
+    <ClInclude Include="include\std.labelmodels_to_hashmapper.hpp" />
+    <ClInclude Include="include\std.layouts.hpp" />
+    <QtMoc Include="include\std.lcdnumber.hpp" />
+    <QtMoc Include="include\std.linedate.hpp" />
+    <QtMoc Include="include\std.lineedit.hpp" />
+    <ClInclude Include="include\std.linegroup.hpp" />
+    <ClInclude Include="include\std.locate_control_mapper.hpp" />
+    <ClInclude Include="include\std.locate_layout_mapper.hpp" />
+    <ClInclude Include="include\std.lockwindows.hpp" />
+    <ClInclude Include="include\std.logoffuser.hpp" />
+    <QtMoc Include="include\std.mainwindow.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <ClInclude Include="include\std.mdichildwindow.hpp" />
+    <ClInclude Include="include\std.mdiframewindow.hpp" />
+    <QtMoc Include="include\std.mdiframewindowarea.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="include\std.menu.hpp" />
+    <QtMoc Include="include\std.menubar.hpp" />
+    <ClInclude Include="include\std.menuitemdata.hpp" />
+    <ClInclude Include="include\std.menuitems.hpp" />
+    <ClInclude Include="include\std.popup.hpp" />
+    <QtMoc Include="include\std.progressbar.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <ClInclude Include="include\std.putting_icondata_on_resourcefile.hpp" />
+    <QtMoc Include="include\std.radiobutton.hpp" />
+    <QtMoc Include="include\std.radiogroup.hpp" />
+    <ClInclude Include="include\std.ras.hpp" />
+    <QtMoc Include="include\std.resource.hpp" />
+    <ClInclude Include="include\std.search_internal_container_mapper.hpp" />
+    <ClInclude Include="include\std.search_widget_control.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </ClInclude>
+    <ClInclude Include="include\std.shutdownwindows.hpp" />
+    <QtMoc Include="include\std.splitter.hpp" />
+    <ClInclude Include="include\std.sspi.hpp" />
+    <ClInclude Include="include\std.statusbar.hpp" />
+    <ClInclude Include="include\std.submenuitemdata.hpp" />
+    <QtMoc Include="include\std.tabbed.hpp" />
+    <ClInclude Include="include\std.tabbeddefs.hpp" />
+    <ClInclude Include="include\std.tabbedindex.hpp" />
+    <ClInclude Include="include\std.tabbedmenuitems.hpp" />
+    <ClInclude Include="include\std.tabbedwidget_impl.hpp" />
+    <QtMoc Include="include\std.table.hpp" />
+    <ClInclude Include="include\std.tabledefs.hpp" />
+    <QtMoc Include="include\std.tabledelegate.hpp" />
+    <ClInclude Include="include\std.tablefields.hpp" />
+    <ClInclude Include="include\std.tablewidgetitem.hpp" />
+    <QtMoc Include="include\std.textedit.hpp" />
+    <ClInclude Include="include\std.timer.hpp" />
+    <QtMoc Include="include\std.toolbar.hpp" />
+    <ClInclude Include="include\std.toolbaritems.hpp" />
+    <QtMoc Include="include\std.toolbox.hpp" />
+    <QtMoc Include="include\std.toolbutton.hpp" />
+    <QtMoc Include="include\std.treeview.hpp" />
+    <QtMoc Include="include\std.treewidget.hpp" />
+    <ClInclude Include="include\std.treewidgetitem.hpp" />
+    <ClInclude Include="include\std.unicodestring.hpp" />
+    <ClInclude Include="include\std.update_controlsby_mapper.hpp" />
+    <ClInclude Include="include\std.waitcursor.hpp" />
+    <QtMoc Include="include\std.widget.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <ClInclude Include="include\std.widget_icon.hpp">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </ClInclude>
+    <ClInclude Include="include\std.winsys.hpp" />
     <ClInclude Include="libstdframe_qt.h" />
     <ClInclude Include="libstdframe_qt_global.h" />
   </ItemGroup>

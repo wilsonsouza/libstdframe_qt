@@ -1,0 +1,215 @@
+//-----------------------------------------------------------------------------------------------//
+// dedaluslib.lib for Windows
+//
+// Created by Wilson.Souza 2012, 2013
+// For Libbs Farma
+//
+// Dedalus Prime
+// (c) 2012, 2013
+//-----------------------------------------------------------------------------------------------//
+#pragma once
+#include <std.defsx.hpp>
+#include <std.button.hpp>
+#include <std.combobox.hpp>
+#include <std.lineedit.hpp>
+#include <std.checkbox.hpp>
+#include <std.groupboxtopbuttoncontrol.hpp>
+#include <std.searchwidgetcontrol.hpp>
+#include <std.layouts.hpp>
+#include <std.mdichildwindow.hpp>
+#include <std.label.hpp>
+//-----------------------------------------------------------------------------------------------//
+using namespace std;
+//-----------------------------------------------------------------------------------------------//
+SearchWidgetControl::SearchWidgetControl(QWidget * pOwner, std::ustring const & strName):
+Widget(pOwner, 0)
+{
+   SetName(strName);
+   SetIconsList(shared_ptr<IconsImplEx<>>(new IconsImplEx<>()));
+   SetVerticalLay(new VerticalBox);
+   SetFilterSelectedName(ustring());
+   SetOK(new Button(Captions::OK, GetIconsList()->GetCommon()->OK));
+   SetHelp(new Button(Captions::HELP, GetIconsList()->GetCommon()->HELPINDEX));
+   SetCancel(new Button
+   {
+      Captions::CANCEL, GetIconsList()->GetCommon()->CANCEL, ustring(), true
+   });
+   SetLookIn(new ComboBox());
+   SetOptions(new GroupBoxTopButtonControl(ustring("Opções de pesquisa"), ustring()));
+   SetFindWhat(new LineEdit());
+   SetRegularExpressions(new ComboBox(std::ustring(), false));
+   /**/
+   SetLookInHasher(std::shared_ptr<LookInMapper>(new LookInMapper()));
+   SetFindWhatMaskHasher(std::shared_ptr<FindWhatMaskMapper>(new FindWhatMaskMapper()));
+
+   //set default width component
+   setMinimumWidth(310);
+   setMaximumWidth(310);
+}
+//-----------------------------------------------------------------------------------------------//
+SearchWidgetControl::~SearchWidgetControl()
+{
+}
+//-----------------------------------------------------------------------------------------------//
+void SearchWidgetControl::SetLookInMapper(std::SearchWidgetControl::LookInMapper const & lmLookIn)
+{
+   /**/
+   LookInHasher->clear ( );
+   LookInHasher->assign ( lmLookIn.cbegin ( ), lmLookIn.cend ( ) );
+   /**/
+   std::for_each ( LookInHasher->begin ( ), LookInHasher->end ( ), [&] (std::pair<std::ustring, std::ustring> i ) 
+   { 
+      LookIn->addItem ( i.first, i.second );
+   } );
+}
+//-----------------------------------------------------------------------------------------------//
+void SearchWidgetControl::SetFindWhatListMask(SearchWidgetControl::FindWhatMaskMapper const & fmFindWhatMask)
+{
+   FindWhatMaskHasher->assign ( fmFindWhatMask.cbegin ( ), fmFindWhatMask.cend ( ) );
+}
+//-----------------------------------------------------------------------------------------------//
+void SearchWidgetControl::Create()
+{
+   GetRegularExpressions()->addItems(StringList() 
+      << ustring("Expressões regulares") 
+      << ustring("Mascaras (Tipo *, %, ?"));
+
+   GetVerticalLay()->addWidget(new Label("Procurar por"));
+   GetVerticalLay()->addWidget([this]()->LineEdit *
+   {
+      auto f = GetFindWhat();
+      /**/
+      f->OnReturnPressed = std::bind ( [this] ( )->void
+      {
+         OK->OnClicked ( false, OK );
+      } );
+      /**/
+      f->OnTextChanged = std::bind ( [this] ( std::ustring const & s, std::LineEdit * e )->void 
+      {
+         OK->setEnabled ( s.trimmed ( ).length ( ) );
+      }, f->text(), f );
+      return f;
+   }());
+   GetVerticalLay()->addWidget(new Label("Filtrar por"));
+   GetVerticalLay()->addWidget([this]()->ComboBox *
+   {
+      auto c = GetLookIn();
+      //update combobox look in
+      SetLookInMapper(GetLookInHasher().operator*());
+      c->setEditable(false);
+
+      c->connect(c, &ComboBox::OnCurrentIndexChanged,[=](int const & n, ComboBox * Sender)
+      {
+         typedef std::shared_ptr<std::SearchWidgetControl::LookInMapper> lookmapper_ptr;
+         int fm = GetFindWhatMaskHasher()->size();
+         int lm = GetLookInHasher()->size();
+         auto fnLookup = [&] ( int const & n, lookmapper_ptr const & f )->std::ustring
+         {
+            typedef std::pair<std::ustring, std::ustring> pair_data;
+            int p = 0;
+            auto out =
+            std::find_if ( f->begin ( ), f->end ( ), [&] ( pair_data d )
+            {
+               if ( p == n )
+                  return !d.second.empty;
+               /**/
+               p++;
+               return false;
+            } );
+            return out.operator*( ).second;
+         };
+         /**/
+         if ( lm && ( n <= lm ) )
+            m_FilterSelectedName = fnLookup ( n, LookInHasher );
+
+         if ( fm && ( n <= fm ) )
+            m_FindWhat->setInputMask ( fnLookup ( n, m_FindWhatMaskHasher ) );
+
+         emit Sender->OnUpdateCurrentData(Sender, m_FilterSelectedName);
+      });
+      return c;
+   }());
+   m_VerticalLay->addLayout(m_Options->GetVerticalLay());
+   
+   GroupBoxImpl<> * pgbOptions = m_Options->GetGroup();
+   {
+      pgbOptions->addWidget([this]()->CheckBox *
+      {
+         CheckBox * pcbMatchCase = new CheckBox
+         {
+            nullptr, "Correspondente", std::ustring(), true
+         };
+
+         QObject::connect(pcbMatchCase, &CheckBox::OnStateChanged, [=](Qt::CheckState const & State, CheckBox * Sender)
+         {
+            if(Sender->Checked)
+               m_State |= IDDMATCHCASE;
+         });
+         return pcbMatchCase;
+      }());
+      pgbOptions->addWidget([this]()->CheckBox *
+      {
+         CheckBox * pcbMatchWholeWord = new CheckBox
+         {
+            nullptr, "Coincidir palavra inteira", std::ustring(), true
+         };
+
+         pcbMatchWholeWord->connect(pcbMatchWholeWord, &CheckBox::OnStateChanged,
+            [=](Qt::CheckState const & State, CheckBox * Sender)
+         {
+            if(Sender->Checked)
+               m_State |= IDDMATCHWHOLEWORD;
+         });
+         return pcbMatchWholeWord;
+      }());
+      pgbOptions->addWidget([this]()->CheckBox *
+      {
+         CheckBox * pcbUse = new CheckBox(nullptr, "Usar", std::ustring(), true);
+
+         pcbUse->connect(pcbUse, &CheckBox::OnStateChanged,
+            [this](Qt::CheckState const & uState, CheckBox * Sender)
+         {
+            m_RegularExpressions->setEnabled(Sender->isChecked());
+         });
+         return pcbUse;
+      }());
+
+      LayoutImpl<QHBoxLayout> * pRegx = new LayoutImpl<QHBoxLayout>();
+      {
+         pRegx->addWidget(m_RegularExpressions);
+         pgbOptions->addLayout(pRegx);
+      }
+
+      //create objects
+      m_Options->Create();
+   }
+
+   WidgetImpl<std::HorizontalBox> * pHorizontalButtons = new WidgetImpl<std::HorizontalBox>();
+   {
+      pHorizontalButtons->addStretch();
+      pHorizontalButtons->addWidget([this]()->Button *
+      {
+         GetOK()->connect(GetOK(), &Button::OnClicked, [this](bool const &, Button * Sender)
+         {
+            emit OnFindWhat(operator std::SearchWidgetControl *());
+         });
+         return GetOK();
+      }());
+      pHorizontalButtons->addWidget([this]()->Button *
+      {
+         auto b = GetCancel();
+         /**/
+         b->connect(b, &Button::OnClicked, [=](bool const &, Button * Sender)
+         {
+            GetFindWhat()->setText(std::ustring());
+            GetFindWhat()->setFocus();
+         });
+         return b;
+      }());
+      pHorizontalButtons->addWidget(GetHelp());
+   }
+   
+   GetVerticalLay()->addWidget(pHorizontalButtons);
+   GetVerticalLay()->addStretch();
+}
+//-----------------------------------------------------------------------------------------------//
