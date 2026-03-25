@@ -1,8 +1,3 @@
-Gemini said
-Since you are developing libstdframe_qt as a high-level abstraction, you want the documentation to reflect its architectural value—especially since it leverages C++14 and PPLX (Parallel Patterns Library) for asynchronous tasks.
-
-Here is a professional, modernized description designed for a GitHub README.md or technical documentation:
-
 🏗️ libstdframe_qt
 A High-Performance C++11/14 Abstraction Layer for Qt Framework
 
