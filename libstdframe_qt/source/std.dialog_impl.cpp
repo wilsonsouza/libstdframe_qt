@@ -6,23 +6,19 @@
 //
 // 2WW Engenharia de Sistemas
 // (c) 2012, 2026, 2013
+//
+// Last Updated: introduce support for c++14 2018
+// Last Updated: introduce support for c++20 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
-#pragma warning(disable:4275)
-#pragma warning(disable:4251)
-#include <std.dialog.hpp>
+#include <std.dialog_impl.hpp>
 //-----------------------------------------------------------------------------------------------//
-namespace std
+std::dialog_impl::dialog_impl(QWidget* owner, Qt::WindowFlags flags, unicodestring const& name) :
+   QDialog{ owner, flags },
+   task_group{},
+   m_verticallay{ new vertical_box{ this, name } },
+   m_buttons{ new horizontal_box{ this, HORIZONTAL_LAYOUT_BUTTONS_NAME } }
 {
-   class Q_DECL_EXPORT dialog_about : public dialog
-   {
-      Q_OBJECT
-   public:
-      using pointer = shared_ptr<dialog_about>;
-      /**/
-   public:
-      explicit dialog_about(QWidget * owner, unicodestring const & caption);
-      ~dialog_about() override = default;
-      bool create(dialog * dlg) override;
-   };
+   setObjectName(name);
+   setWindowTitle(name);
 }

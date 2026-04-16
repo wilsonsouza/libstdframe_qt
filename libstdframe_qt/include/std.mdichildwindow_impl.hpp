@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012, 2015
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026, 2015
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -25,33 +25,31 @@ namespace sql
 namespace std
 {
    class Q_DECL_EXPORT mdichildwindow;
-   class Q_DECL_EXPORT mdichildwindow_impl : public QMdiSubWindow, public task_group
+   namespace implement
    {
-   public:
-      explicit mdichildwindow_impl(QWidget * owner,
-                                   unicodestring const & name = unicodestring{},
-                                   Qt::WindowFlags f = 0) :
-         QMdiSubWindow{ owner, f },
-         task_group{}
+      class Q_DECL_EXPORT mdichildwindow : public QMdiSubWindow, public task_group
       {
-         setObjectName(name);
-      }
-      virtual ~mdichildwindow_impl() override = default;
-      virtual bool close() = 0;
-      virtual bool create(mdichildwindow * child) = 0;
-      /**/
-   public:
-      function<bool const(mdichildwindow * sender)> on_close{ nullptr };
-      function<bool const(mdichildwindow * sender)> on_activate{ nullptr };
-      function<bool const(mdichildwindow * sender)> on_deactivate{ nullptr };
-      function<bool const(mdichildwindow * sender, uint const & mode)> on_show{ nullptr };
-      function<bool const(mdichildwindow * sender, QPoint const & p)> on_context_menu_requested{ nullptr };
-      function<bool const(mdichildwindow * sender, 
-                          Qt::WindowStates old_states, 
-                          Qt::WindowStates new_states)> on_window_state_changed{ nullptr };
-      function<bool const(QObject * sender, QObject * child, void * msg, void * data)> on_notify{ nullptr };
-      /**/
-   protected:
-      shared_ptr<icons_impl<icons::common>> m_iconlist{ new icons_impl<icons::common>{} };
-   };
-};
+      public:
+         explicit mdichildwindow(QWidget* owner,
+                                 unicodestring const& name = unicodestring{},
+                                 Qt::WindowFlags f = Qt::WindowFlags{});
+         virtual ~mdichildwindow() override = default;
+         virtual bool close() = 0;
+         virtual bool create(mdichildwindow* child) = 0;
+         /**/
+      public:
+         function<bool const(mdichildwindow* sender)> on_close{ nullptr };
+         function<bool const(mdichildwindow* sender)> on_activate{ nullptr };
+         function<bool const(mdichildwindow* sender)> on_deactivate{ nullptr };
+         function<bool const(mdichildwindow* sender, uint const& mode)> on_show{ nullptr };
+         function<bool const(mdichildwindow* sender, QPoint const& p)> on_context_menu_requested{ nullptr };
+         function<bool const(mdichildwindow* sender,
+                             Qt::WindowStates old_states,
+                             Qt::WindowStates new_states)> on_window_state_changed{ nullptr };
+         function<bool const(QObject* sender, QObject* child, void* msg, void* data)> on_notify{ nullptr };
+         /**/
+      protected:
+         icons_impl::pointer<icons::common> m_iconlist{ new icons_impl<icons::common>{} };
+      };
+   }
+}

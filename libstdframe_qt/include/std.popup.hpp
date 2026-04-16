@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -16,76 +16,24 @@
 //-----------------------------------------------------------------------------------------------//
 namespace std
 {
-   class popup : public list<menuitems *>, public QObject
+   //-----------------------------------------------------------------------------------------------//
+   class popup : public list<menuitems*>, public QObject
    {
    public:
-      using pointer = shared_ptr<popup>;
-      using value_type = list<menuitems *>;
+      using pointer = unique_ptr<popup>;
+      using value_type = list<menuitems*>;
       //
    public:
       popup() = default;
-      explicit popup(unicodestring const & name = unicodestring{}) : value_type{}, QObject{}
-      {
-         setObjectName(name);
-      }
-      explicit popup(popup const & rhs) : value_type{}, QObject{}
-      {
-         for_each(begin(), end(), [=](menuitems * value)
-         {
-            push_back(value);
-         });
-      }
-      popup & operator+(menuitems * value)
-      {
-         if (value != nullptr)
-         {
-            push_back(value);
-         }
-         return *this;
-      }
-      popup & operator+(popup const & value)
-      {
-         for_each(value.begin(), value.end(), [=](menuitems * p)
-         {
-            push_back(p);
-         });
-         return *this;
-      }
-      virtual menuitemdata  * operator[](unicodestring const & name)
-      {
-         for (auto & value : *this)
-         {
-            auto out = value->finditem(name);
-            /**/
-            if (out != nullptr)
-            {
-               return out;
-            }
-         }
-         return nullptr;
-      }
-      virtual menuitems * operator()(unicodestring const & name)
-      {
-         return *find_if(begin(), end(), [&](menuitems * value)
-         {
-            return(name.compare(value->get_caption()));
-         });
-      }
-      virtual menuitems * findpopup(unicodestring const & name)
-      {
-         return (*this)(name);
-      }
-      template <typename t> t * find(unicodestring const & name)
-      {
-         return static_cast<t *>((*this)(name));
-      }
-      virtual menuitemdata * finditem(unicodestring const & name)//search_item
-      {
-         return (*this)[name];
-      }
-      popup & operator<<(menuitems * items)
-      {
-         return operator+(items);
-      }
+      explicit popup(unicodestring const& name = unicodestring{});
+      explicit popup(popup const& rhs);
+      popup& operator+(menuitems* value);
+      popup& operator+(popup const& value);
+      virtual menuitemdata* operator[](unicodestring const& name);
+      virtual menuitems* operator()(unicodestring const& name);
+      virtual menuitems* findpopup(unicodestring const& name);
+      template <typename find_t, typename value_t> find_t find(value_t const&& name);
+      virtual menuitemdata* finditem(unicodestring const& name);//search_item
+      popup& operator<<(menuitems* items);
    };
 }

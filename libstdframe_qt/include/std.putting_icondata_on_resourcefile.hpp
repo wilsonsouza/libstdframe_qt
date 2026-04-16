@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
 // Created by Wilson.Souza 2012, 2013, 2014, 2018
-// For Libbs Farma
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012, 2013, 2014
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026, 2013, 2014
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -15,54 +15,47 @@
 namespace std
 {
    class Q_DECL_EXPORT action;
-   class action_impl : public QAction
+   namespace implement
    {
-   public:
-      using action_type = QAction;
-      using object_value = QObject;
-      /**/
-   public:
-      explicit action_impl(QObject * owner_ptr) :action_type{ owner_ptr }
+      class action : public QAction
       {
-         setObjectName("action_impl");
-      }
-      explicit action_impl(unicodestring const & caption_name, object_value * owner_ptr) :
-         action_type{ caption_name, owner_ptr }
-      {
-         setObjectName(caption_name);
-      }
-      explicit action_impl(QIcon const & icon_object, 
-                           unicodestring const & caption_name, 
-                           object_value * owner_ptr) :
-         action_type{ icon_object, caption_name, owner_ptr }
-      {
-         setObjectName(caption_name);
-      }
-      ~action_impl() override = default;
-      operator const action_type * () const
-      {
-         return this;
-      }
-      //
-   public:
-      function<bool const(action * sender)> on_changed{ nullptr };
-      function<bool const(action * sender)> on_hovered{ nullptr };
-      function<bool const(bool const & checked_value, action * sender)> on_toggled{ nullptr };
-      function<bool const(bool const & checked_value, action * sender)> on_command{ nullptr };
-      function<bool const(action * sender, bool const & value, uint const & value_id)> on_update_ui{ nullptr };
-      //
-   protected:
-      virtual void const set_notify_everything() = 0;
-      /**/
-   protected:
-      bool m_isleftpressed;
-   };
+      public:
+         using type_action = QAction;
+         using type_object = QObject;
+         using type_icon = QIcon;
+         /**/
+      public:
+         explicit action(type_object* object,
+                         unicodestring const&& name = unicodestring{"q_action"},
+                         type_icon const&& icon = type_icon{}) :
+            QAction{ object }
+         {
+            setIcon(icon);
+            setText(name);
+            setObjectName(name);
+         }
+         virtual ~action() override = default;
+         //
+      public:
+         function<bool const(std::action* sender)> on_changed{ nullptr };
+         function<bool const(std::action* sender)> on_hovered{ nullptr };
+         function<bool const(bool const& checked, std::action* sender)> on_toggled{ nullptr };
+         function<bool const(bool const& checked, std::action* sender)> on_command{ nullptr };
+         function<bool const(std::action* sender, bool const& value, uint const& value_id)> on_update_ui{ nullptr };
+         //
+      protected:
+         virtual void const set_notify_everything() = 0;
+         /**/
+      protected:
+         bool m_isleftpressed;
+      };
+   }
    //-----------------------------------------------------------------------------------------------//
    class Q_DECL_EXPORT menu;
    class Q_DECL_EXPORT menubar;
    class Q_DECL_EXPORT mdiframewindow;
    class Q_DECL_EXPORT mainwindow;
-   class Q_DECL_EXPORT action : public action_impl
+   class Q_DECL_EXPORT action : public implement::action
    {
       Q_OBJECT
    public:
@@ -74,39 +67,26 @@ namespace std
    public:
       enum class state : uint
       {
-         UNDEFINED,
+         OFF,
          ENABLED = 1,
          CHECKED
       };
+      using states = set<state>;
       //
    public:
-      explicit action(QObject * owner_ptr) : action_impl{ owner_ptr }
-      {
-         set_notify_everything();
-      }
-      explicit action(unicodestring const & caption_name, object_value * owner_ptr) :
-         action_impl{ caption_name, owner_ptr }
-      {
-         set_notify_everything();
-      }
-      explicit action(QIcon const & icon_object, 
-                      unicodestring const & caption_name, 
-                      object_value * owner_ptr) :
-         action_impl{ icon_object, caption_name, owner_ptr }
-      {
-         set_notify_everything();
-      }
-      ~action() override
+      explicit action(type_object* object,
+                      unicodestring const&& name = unicodestring{},
+                      type_icon const&& icon = type_icon{});
+      virtual ~action() override
       {
          this->disconnect();
       }
-      operator const action_type *() const
+      auto operator->()
       {
-         return this;
+         return dynamic_cast<type_action*>(this);
       }
       /**/
    protected:
       void const set_notify_everything() override;
    };
-   //-----------------------------------------------------------------------------------------------//
 }

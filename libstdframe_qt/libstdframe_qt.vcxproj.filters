@@ -32,9 +32,6 @@
     <ClCompile Include="source\std.action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\std.analyzeritems.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\std.application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\std.combobox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\std.connectedwizard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\std.control.cpp">
@@ -254,6 +248,15 @@
     <ClCompile Include="source\std.radiogroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\std.mainwindow_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\std.mdichildwindow_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\std.dialog_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libstdframe_qt.h">
@@ -263,12 +266,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\std.common.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\std.defs.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\std.defsx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\std.formatqueryfieldstoalias.hpp">
@@ -373,9 +370,6 @@
     <ClInclude Include="include\std.dialog_impl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\std.connected_wizard.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\std.panel.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -425,6 +419,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\std.widget_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\std.defs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\std.defaultmenu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\std.defsx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

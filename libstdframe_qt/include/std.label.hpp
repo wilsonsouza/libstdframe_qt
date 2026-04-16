@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
 // Created by Wilson.Souza 2012
-// For Libbs Farma
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -19,14 +19,10 @@ namespace std
       Q_OBJECT
    public:
       label() = default;
-      explicit label(QWidget * owner,
-                     unicodestring const & title,
-                     unicodestring const & name = std::unicodestring(),
-                     Qt::WindowFlags wf = 0) :QLabel{ owner, wf }
-      {
-         this->setText(title);
-         this->setObjectName(name);
-      }
+      explicit label(QWidget* owner,
+                     unicodestring const& title,
+                     unicodestring const& name = std::unicodestring(),
+                     Qt::WindowFlags wf = Qt::WindowFlags{});
       virtual ~label() = default;
       /**/
    public:
@@ -34,23 +30,7 @@ namespace std
       function<bool(unicodestring const & link, label * sender)> on_link_hovered{ nullptr };
       /**/
    protected:
-      void set_notify_everthing()
-      {
-         connect(this, &QLabel::linkActivated, [=](unicodestring const & link)
-         {
-            if (on_link_activated != nullptr)
-            {
-               emit on_link_activated(link, this);
-            }
-         });
-         connect(this, &QLabel::linkHovered, [=](unicodestring const & link)
-         {
-            if (on_link_hovered != nullptr)
-            {
-               emit on_link_hovered(link, this);
-            }
-         });
-      }
+      void set_notify_everthing();
    };
 }
 //-----------------------------------------------------------------------------------------------//

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -19,13 +19,13 @@ namespace std
    {
       Q_OBJECT
    public:
-      explicit widget(QWidget * owner, unicodestring const & name, Qt::WindowFlags f = 0);
+      explicit widget(QWidget* owner, unicodestring const& name, Qt::WindowFlags f = Qt::WindowFlags{});
       ~widget() override = default;
       //
    protected:
-      bool event(QEvent * e) override;
+      bool event(QEvent* e) override;
       /**/
    protected:
-      menu * m_menu{ nullptr };
+      menu* m_menu{ nullptr };
    };
 }

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -14,45 +14,38 @@
 //-----------------------------------------------------------------------------------------------//
 namespace std
 {
+   using qlayout = QLayout;
    class Q_DECL_EXPORT menu;
    class Q_DECL_EXPORT widget;
    //-----------------------------------------------------------------------------------------------//
-   template<class Object>
-   class Q_DECL_EXPORT widget_impl : virtual public QWidget
+   template<typename layout_t> concept is_layout = is_base_of_v<qlayout, layout_t>;
+   //-----------------------------------------------------------------------------------------------//
+   template<typename layout_t> requires is_layout<layout_t>
+   class Q_DECL_EXPORT widget_impl : virtual public layout_t, virtual public QWidget
    {
    public:
-      using value_type = typename Object;
-      using value_type_pointer = typename Object *;
+      using value_type = layout_t;
       //
    public:
-      explicit widget_impl(QWidget * owner, unicodestring const & name, Qt::WindowFlags flags = 0) :
-         QWidget{ owner, flags }
+      explicit widget_impl(QWidget* owner,
+                           unicodestring const& name,
+                           Qt::WindowFlags flags = {}) :
+         QWidget{ owner, std::move(flags) }
       {
-         setObjectName(name + "_QWidget");
-         m_value_type->setObjectName(name + "_QWidget_QLayout");
-         setLayout(m_value_type);
+         QWidget::setObjectName(name + "_widget");
+         QWidget::setLayout(dynamic_cast<layout_t*>(this));
       }
-      ~widget_impl() override
+      virtual ~widget_impl() override
       {
-         QObject::disconnect();
+         value_type::disconnect();
       }
-      virtual QWidget * create()
+      template<typename object_t>
+         requires(is_layout<object_t> || is_base_of<QWidget, object_t>) auto operator->()
       {
-         return this;
-      }
-      operator QWidget *() const
-      {
-         return this;
-      }
-      value_type_pointer box()
-      {
-         return m_value_type;
+         return dynamic_cast<object_t*>(this);
       }
       /**/
    public:
-      function<bool(QPoint const & pt, widget_impl<value_type> * sender)> on_context_menu_requested{ nullptr };
-      //
-   protected:
-      value_type_pointer m_value_type{ new value_type{} };
+      function<bool(QPoint const& pt, widget_impl<value_type>* sender)> on_context_menu_requested{ nullptr };
    };
 }

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -26,16 +26,11 @@ namespace std
       friend class mainwindow;
       friend class mdiframewindow;
       friend class menu;
+      using widget_parent = QWidget;
    public:
       /**/
-      explicit menubar(QWidget * owner, unicodestring const & name = unicodestring{}) :QMenuBar{ owner }
-      {
-         set_notify_everything()->setObjectName(name);
-      }
-      ~menubar() override
-      {
-         disconnect();
-      }
+      explicit menubar(widget_parent* owner, unicodestring const& name = unicodestring{});
+      virtual ~menubar() override;
       menubar * create(popup const & owner, action * sender);
       action * operator [](unicodestring menu_id);
       virtual menubar * set_enable(unicodestring const & menu_id, bool value_enabled);

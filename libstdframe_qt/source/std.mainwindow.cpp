@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #include <std.defs.hpp>
 #include <std.application.hpp>
@@ -24,7 +24,7 @@ namespace std
    //-----------------------------------------------------------------------------------------------//
    mainwindow::mainwindow(QWidget * owner,
                           unicodestring const & name,
-                          Qt::WindowFlags wfflags) : mainwindow_impl(owner, name, wfflags)
+                          Qt::WindowFlags wfflags) : implement::mainwindow{ owner, name, wfflags }
    {
       this->m_application_handle = static_cast<application *>(QCoreApplication::instance());
       this->setObjectName(name);
@@ -35,7 +35,7 @@ namespace std
       }
       /**/
       m_application_handle->setOrganizationDomain(company_names{}.COPYRIGHT);
-      m_settings = shared_ptr<settings>
+      m_settings = unique_ptr<settings>
       {
          new settings{m_application_handle->organizationName(), m_application_handle->applicationName(), this}
       };

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -14,101 +14,46 @@
 //-----------------------------------------------------------------------------------------------//
 namespace std
 {
+   using object = QObject;
+   using icon = QIcon;
+   //
    class Q_DECL_EXPORT action;
    class Q_DECL_EXPORT submenuitemdata;
    class Q_DECL_EXPORT menuitemdata : public QObject
    {
    public:
-      using pointer = shared_ptr<menuitemdata>;
+      using pointer = unique_ptr<menuitemdata>;
       /**/
-      template<typename Name, class Icon = QIcon, typename Enabled = bool, typename Checked = bool >
-      explicit menuitemdata(typename Name && name,
-                            typename Icon && icon_obj = QIcon{},
-                            typename Enabled && enabled = false,
-                            typename Checked && checked = false) :
-         QObject{},
-         m_submenu_itemdata{ new submenuitemdata{} },
-         m_icon{ shared_ptr<QIcon>{ new QIcon{ forward<Icon>(icon_obj) } } },
-         m_enabled{ forward<typename Enabled>(enabled) },
-         m_checked{ forward<typename Checked>(checked) }
-      {
-         set_caption(forward<typename Name>(name));
-      }
-      ~menuitemdata() override = default;
+      menuitemdata() = delete;
+      explicit menuitemdata(unicodestring const&& name,
+                            icon const&& icon_obj = icon{},
+                            bool const&& enabled = false,
+                            bool const&& checked = false);
+      virtual ~menuitemdata() override = default;
       virtual bool const is_separator() const;
       virtual bool const is_action() const;
       virtual bool const is_submenu() const;
-      virtual menuitemdata & operator[](menuitemdata * d);
-      virtual menuitemdata & operator+(menuitemdata * d);
-      submenuitemdata * get_submenu_itemdata() const;
-      menuitemdata * operator=(menuitemdata const & item)
-      {
-         m_actionitem = move(item.m_actionitem);
-         set_caption(item.objectName());
-         m_checked = item.m_checked;
-         m_enabled = item.m_enabled;
-         m_icon = move(item.m_icon);
-         return this;
-      }
-      action * get_actionitem()
-      {
-         return m_actionitem;
-      }
-      menuitemdata * set_actionitem(action const * value)
-      {
-         m_actionitem = const_cast<action *>(value);
-         return this;
-      }
-      menuitemdata * set_icon(QIcon const & icon)
-      {
-         m_icon->operator=(icon);
-         return this;
-      }
-      shared_ptr<QIcon> const & get_icon() const
-      {
-         return m_icon;
-      }
-      bool get_enabled()
-      {
-         return m_enabled;
-      }
-      bool get_checked()
-      {
-         return m_checked;
-      }
-      menuitemdata * set_enabled(bool const & enabled)
-      {
-         m_enabled = enabled;
-         return this;
-      }
-      menuitemdata * set_checked(bool const & checked)
-      {
-         m_checked = checked;
-         return this;
-      }
-      menuitemdata * set_caption(unicodestring const & caption)
-      {
-         setObjectName(caption);
-         return this;
-      }
-      unicodestring const get_caption() const
-      {
-         return objectName();
-      }
-      long const get_id() const
-      {
-         return m_id;
-      }
-      menuitemdata * set_id(long const & id)
-      {
-         m_id = id;
-         return this;
-      }
+      virtual menuitemdata& operator[](menuitemdata* d);
+      virtual menuitemdata& operator+(menuitemdata* d);
+      submenuitemdata* get_submenuitemdata() const;
+      menuitemdata* operator=(menuitemdata const& item);
+      action* get_actionitem();
+      menuitemdata* set_actionitem(action const* value);
+      menuitemdata* set_icon(icon const& icon);
+      unique_ptr<icon> const& get_icon() const;
+      bool get_enabled();
+      bool get_checked();
+      menuitemdata* set_enabled(bool const& enabled);
+      menuitemdata* set_checked(bool const& checked);
+      menuitemdata* set_caption(unicodestring const& caption);
+      unicodestring const get_caption() const;
+      long const get_id() const;
+      menuitemdata* set_id(long const& id);
       /**/
    protected:
-      shared_ptr<QIcon> m_icon{ nullptr };
-      action * m_actionitem{ nullptr };
-      shared_ptr<submenuitemdata> m_submenu_itemdata{ nullptr };
+      unique_ptr<icon> m_icon{ nullptr };
+      action* m_actionitem{ nullptr };
+      unique_ptr<submenuitemdata> m_subitemdata{ nullptr };
       long m_id{ 0l };
       bool m_enabled{ false };
       bool m_checked{ false };

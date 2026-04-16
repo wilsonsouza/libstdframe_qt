@@ -13,23 +13,24 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
     <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>.\bin</OutDir>
+    <IntDir>.\bin\obj</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -53,11 +54,14 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_PRINTSUPPORT_LIB;QT_SQL_LIB;QT_WIDGETS_LIB;LIBSTDFRAME_QT_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\utilities\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -100,15 +104,14 @@
     <ClCompile Include="libstdframe_qt.cpp" />
     <ClCompile Include="source\std.dialog_about.cpp" />
     <ClCompile Include="source\std.action.cpp" />
-    <ClCompile Include="source\std.analyzeritems.cpp" />
     <ClCompile Include="source\std.application.cpp" />
     <ClCompile Include="source\std.button.cpp" />
     <ClCompile Include="source\std.checkbox.cpp" />
     <ClCompile Include="source\std.combobox.cpp" />
-    <ClCompile Include="source\std.connectedwizard.cpp" />
     <ClCompile Include="source\std.control.cpp" />
     <ClCompile Include="source\std.defs.cpp" />
     <ClCompile Include="source\std.dialog.cpp" />
+    <ClCompile Include="source\std.dialog_impl.cpp" />
     <ClCompile Include="source\std.dialog_login.cpp" />
     <ClCompile Include="source\std.dialog_search.cpp" />
     <ClCompile Include="source\std.displayprogressbar.cpp" />
@@ -123,6 +126,8 @@
     <ClCompile Include="source\std.helpwrdeveloperinfoitems.cpp" />
     <ClCompile Include="source\std.hiperlink.cpp" />
     <ClCompile Include="source\std.icondata.cpp" />
+    <ClCompile Include="source\std.mainwindow_impl.cpp" />
+    <ClCompile Include="source\std.mdichildwindow_impl.cpp" />
     <ClCompile Include="source\std.panel.cpp" />
     <ClCompile Include="source\std.label.cpp" />
     <ClCompile Include="source\std.linedate.cpp" />
@@ -186,13 +191,12 @@
     <QtMoc Include="include\std.checkbox.hpp" />
     <QtMoc Include="include\std.combobox.hpp" />
     <ClInclude Include="include\std.common.hpp" />
-    <ClInclude Include="include\std.connected_wizard.hpp" />
     <ClInclude Include="include\std.controls.hpp">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
     </ClInclude>
+    <ClInclude Include="include\std.defaultmenu.hpp" />
     <ClInclude Include="include\std.defs.hpp" />
-    <ClInclude Include="include\std.defsx.hpp" />
     <QtMoc Include="include\std.dialog.hpp">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projects\common\libstdframe_qt\libstdframe_qt\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
@@ -210,6 +214,7 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
     <QtMoc Include="include\std.dockwindow.hpp" />
+    <ClInclude Include="include\std.defsx.hpp" />
     <ClInclude Include="include\std.formatqueryfieldstoalias.hpp" />
     <ClInclude Include="include\std.generate_container_mapper.hpp" />
     <ClInclude Include="include\std.gettingicondataonresourcefile.hpp" />

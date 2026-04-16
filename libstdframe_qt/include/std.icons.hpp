@@ -1,178 +1,185 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
 // Created by Wilson.Souza 2012
-// For Libbs Farma
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
 #pragma warning(disable:4251)
 #include <std.defs.hpp>
 //-----------------------------------------------------------------------------------------------//
-namespace std
+namespace std::icons
 {
    //-----------------------------------------------------------------------------------------------//
-   namespace icons
+   using icons = QIcon;
+   struct initial_directory : public QObject
    {
-      struct Q_DECL_EXPORT initial_directory : public QObject
-      {
-         using pointer = shared_ptr<initial_directory>;
-         using value_type = QObject;
-         initial_directory() = default;
-         unicodestring m_path{ static_cast<QGuiApplication *>(QCoreApplication::instance())->libraryPaths()[0] };
-      };
+      using pointer = unique_ptr<initial_directory>;
+      using value_type = QObject;
+      initial_directory() = default;
+      unicodestring m_path{ static_cast<QGuiApplication*>(QCoreApplication::instance())->libraryPaths()[0] };
+   };
 
-      struct Q_DECL_EXPORT file : public initial_directory
-      {
-         QIcon NEW{ m_path + "Action-File-new.ico" };
-         QIcon OPEN{ m_path + "Action-edit.ico" };
-         QIcon CLOSE{ m_path + "App-restart.ico" };
-         QIcon SAVE{ m_path + "App-write.ico" };
-         QIcon PRINT{ m_path + "Action-File-print.ico" };
-         QIcon PRINT_VIEW{ m_path + "Action-frame-print.ico" };
-         QIcon CHANGE_USER{ m_path + "App-user.ico" };
-         QIcon LOGOFF{ m_path + "App-logout.ico" };
-         QIcon EXIT{ m_path + "Action-exit.ico" };
-         QIcon SAVE_AS{ m_path + "Device-zip-mount.ico" };
-         QIcon PRINT_SETUP{ m_path + "Device-print-class.ico" };
-         QIcon PRINT_PAGE_SETUP{ m_path + "Filesystem-folder-print.ico" };
-         QIcon RECENT_FILES{ m_path + "Action-history.ico" };
-         file() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT edit : public initial_directory
-      {
-         QIcon UNDO{ m_path + "Action-reload.ico" };
-         QIcon CUT{ m_path + "Action-cut.ico" };
-         QIcon PASTE{ m_path + "Action-paste.ico" };
-         QIcon COPY{ m_path + "Action-copy.ico" };
-         QIcon REMOVE{ m_path + "Action-delete.ico" };
-         QIcon FIND_REPLACE{ m_path + "Action-find.ico" };
-         QIcon GOTO{ m_path + "goto.ico" };
-         edit() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT window : public initial_directory
-      {
-         QIcon CLOSEALL{ m_path + "Action-view-remove.ico" };
-         QIcon CLOSE{ m_path + "Action-remove.ico" };
-         QIcon PREVIOUS{ m_path + "Fleche gauche bleue.ico" };
-         QIcon NEXT{ m_path + "Fleche droite bleue.ico" };
-         QIcon TILE{ m_path + "Action-view-left-right.ico" };
-         QIcon TABBED{ m_path + "Action-tab.ico" };
-         QIcon REFRESH{ m_path + "Actualiser.ico" };
-         QIcon HIDE{ m_path + "Action-tab-remove.ico" };
-         QIcon MAXIMIZE{ m_path + "Action-window-fullscreen.ico" };
-         QIcon MINIMIZE{ m_path + "Action-window-no-fullscreen.ico" };
-         QIcon DOCUMENT{ m_path + "App-knode.ico" };
-         window() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT style : public initial_directory
-      {
-         QIcon MACINTOSH{ m_path + "mac_colored.ico" };
-         QIcon WINDOWS{ m_path + "windows.ico" };
-         QIcon MOTIF{ m_path + "App-x.ico" };
-         style() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT common : public initial_directory
-      {
-         QIcon FONTS{ m_path + "App-fonts.ico" };
-         QIcon OK{ m_path + "ok.png" };
-         QIcon APPLOGINMANAGER{ m_path + "App-login-manager.ico" };
-         QIcon PASSWORD{ m_path + "password.png" };
-         QIcon LOGINMANAGER{ m_path + "Login Manager.png" };
-         QIcon HELPINDEX{ m_path + "App-help-index.ico" };
-         QIcon BACK{ m_path + "back.png" };
-         QIcon FAIL{ m_path + "error.png" };
-         QIcon CONTACTS{ m_path + "evolution-contacts.png" };
-         QIcon LOGOUT{ m_path + "logout.png" };
-         QIcon MAIL{ m_path + "mail.png" };
-         QIcon MYDOCUMENTS{ m_path + "mydocuments.png" };
-         QIcon RELOAD{ m_path + "Actualiser.ico" };
-         QIcon DENIED{ m_path + "Ad Aware.ico" };
-         QIcon CANCEL{ m_path + "Action-cancel.ico" };
-         QIcon EXCLAMATION{ m_path + "Exclamation.ico" };
-         QIcon FAQ{ m_path + "faq.ico" };
-         QIcon DOWN{ m_path + "Fleche bas bleue.ico" };
-         QIcon UP{ m_path + "Fleche haut bleue.ico" };
-         QIcon LEFT{ m_path + "Fleche gauche bleue.ico" };
-         QIcon RIGHT{ m_path + "Fleche droite bleue.ico" };
-         QIcon INFORMATION{ m_path + "Information.ico" };
-         QIcon PUBLIC{ m_path + "Information.ico" };
-         QIcon QUESTION{ m_path + "Information.ico" };
-         QIcon WORKING{ m_path + "Travaux.ico" };
-         QIcon VALID{ m_path + "Validé.ico" };
-         QIcon UPDATECACHE{ m_path + "App-cache.ico" };
-         QIcon STATISTICS{ m_path + "App-chart.ico" };
-         QIcon COINS{ m_path + "coins.ico" };
-         QIcon MEDICO{ m_path + "App-virussafe-injection.ico" };
-         /**/
-         QIcon MINUS{ m_path + "action-remove.ico" };
-         QIcon PLUS{ m_path + "action-edit-add.ico" };
-         /**/
-         QIcon DBSTATUS{ m_path + "Action-db-status.ico" };
-         /**/
-         QIcon INSERT{ m_path + "insertdoc.png" };
-         QIcon CHANGE{ m_path + "App-write.ico" };
-         QIcon VIEW{ m_path + "App-xeyes.ico" };
-         QIcon IMPORT{ m_path + "App-warehause.ico" };
-         QIcon EXPORT{ m_path + "App-navigator.ico" };
-         QIcon PRINT{ m_path + "App-kjobviewer-printer.ico" };
-         QIcon PRINTPREVIEW{ m_path + "App-kde-print-fax.ico" };
-         QIcon PRINTSETUP{ m_path + "Action-file-quick-print.ico" };
-         QIcon PRINTPAGE{ m_path + "Action-frame-print.ico" };
-         /**/
-         QIcon CUT{ m_path + "Blue-Scissors.ico" };
-         common() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT user : public initial_directory
-      {
-         QIcon PASSWORD{ m_path + "password.png" }; //Common::PASSWORD;
-         QIcon MANAGER{ m_path + "login manager.png" }; //Common::LOGINMANAGER;
-         user() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT tools : public initial_directory
-      {
-         QIcon PREFERENCES{ m_path + "App-package-utilities.ico" };
-         tools() = default;
-      };
-      //-----------------------------------------------------------------------------------------------//
-      struct Q_DECL_EXPORT help : public initial_directory
-      {
-         QIcon INDEX{ m_path + "App-help-index.ico" };
-         QIcon HELPINDEX{ m_path + "help_index.png" };
-         help() = default;
-      };
-   }; //Icons
-   //-----------------------------------------------------------------------------------------------//
-   template <typename Object>
-   struct Q_DECL_EXPORT icons_impl : public Object
+   struct file : public initial_directory
    {
-      using value_type = Object;
-      using pointer = shared_ptr<icons_impl<value_type>>;
-      constexpr icons_impl() :value_type{}
+      icons NEW{ m_path + "Action-File-new.ico" };
+      icons OPEN{ m_path + "Action-edit.ico" };
+      icons CLOSE{ m_path + "App-restart.ico" };
+      icons SAVE{ m_path + "App-write.ico" };
+      icons PRINT{ m_path + "Action-File-print.ico" };
+      icons PRINT_VIEW{ m_path + "Action-frame-print.ico" };
+      icons CHANGE_USER{ m_path + "App-user.ico" };
+      icons LOGOFF{ m_path + "App-logout.ico" };
+      icons EXIT{ m_path + "Action-exit.ico" };
+      icons SAVE_AS{ m_path + "Device-zip-mount.ico" };
+      icons PRINT_SETUP{ m_path + "Device-print-class.ico" };
+      icons PRINT_PAGE_SETUP{ m_path + "Filesystem-folder-print.ico" };
+      icons RECENT_FILES{ m_path + "Action-history.ico" };
+      file() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct Q_DECL_EXPORT edit : public initial_directory
+   {
+      icons UNDO{ m_path + "Action-reload.ico" };
+      icons CUT{ m_path + "Action-cut.ico" };
+      icons PASTE{ m_path + "Action-paste.ico" };
+      icons COPY{ m_path + "Action-copy.ico" };
+      icons REMOVE{ m_path + "Action-delete.ico" };
+      icons FIND_REPLACE{ m_path + "Action-find.ico" };
+      icons GOTO{ m_path + "goto.ico" };
+      edit() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct window : public initial_directory
+   {
+      icons CLOSEALL{ m_path + "Action-view-remove.ico" };
+      icons CLOSE{ m_path + "Action-remove.ico" };
+      icons PREVIOUS{ m_path + "Fleche gauche bleue.ico" };
+      icons NEXT{ m_path + "Fleche droite bleue.ico" };
+      icons TILE{ m_path + "Action-view-left-right.ico" };
+      icons TABBED{ m_path + "Action-tab.ico" };
+      icons REFRESH{ m_path + "Actualiser.ico" };
+      icons HIDE{ m_path + "Action-tab-remove.ico" };
+      icons MAXIMIZE{ m_path + "Action-window-fullscreen.ico" };
+      icons MINIMIZE{ m_path + "Action-window-no-fullscreen.ico" };
+      icons DOCUMENT{ m_path + "App-knode.ico" };
+      window() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct style : public initial_directory
+   {
+      icons MACINTOSH{ m_path + "mac_colored.ico" };
+      icons WINDOWS{ m_path + "windows.ico" };
+      icons MOTIF{ m_path + "App-x.ico" };
+      style() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct common : public initial_directory
+   {
+      icons FONTS{ m_path + "App-fonts.ico" };
+      icons OK{ m_path + "ok.png" };
+      icons APPLOGINMANAGER{ m_path + "App-login-manager.ico" };
+      icons PASSWORD{ m_path + "password.png" };
+      icons LOGINMANAGER{ m_path + "Login Manager.png" };
+      icons HELPINDEX{ m_path + "App-help-index.ico" };
+      icons BACK{ m_path + "back.png" };
+      icons FAIL{ m_path + "error.png" };
+      icons CONTACTS{ m_path + "evolution-contacts.png" };
+      icons LOGOUT{ m_path + "logout.png" };
+      icons MAIL{ m_path + "mail.png" };
+      icons MYDOCUMENTS{ m_path + "mydocuments.png" };
+      icons RELOAD{ m_path + "Actualiser.ico" };
+      icons DENIED{ m_path + "Ad Aware.ico" };
+      icons CANCEL{ m_path + "Action-cancel.ico" };
+      icons EXCLAMATION{ m_path + "Exclamation.ico" };
+      icons FAQ{ m_path + "faq.ico" };
+      icons DOWN{ m_path + "Fleche bas bleue.ico" };
+      icons UP{ m_path + "Fleche haut bleue.ico" };
+      icons LEFT{ m_path + "Fleche gauche bleue.ico" };
+      icons RIGHT{ m_path + "Fleche droite bleue.ico" };
+      icons INFORMATION{ m_path + "Information.ico" };
+      icons PUBLIC{ m_path + "Information.ico" };
+      icons QUESTION{ m_path + "Information.ico" };
+      icons WORKING{ m_path + "Travaux.ico" };
+      icons VALID{ m_path + "Validï¿½.ico" };
+      icons UPDATECACHE{ m_path + "App-cache.ico" };
+      icons STATISTICS{ m_path + "App-chart.ico" };
+      icons COINS{ m_path + "coins.ico" };
+      icons MEDICO{ m_path + "App-virussafe-injection.ico" };
+      /**/
+      icons MINUS{ m_path + "action-remove.ico" };
+      icons PLUS{ m_path + "action-edit-add.ico" };
+      /**/
+      icons DBSTATUS{ m_path + "Action-db-status.ico" };
+      /**/
+      icons INSERT{ m_path + "insertdoc.png" };
+      icons CHANGE{ m_path + "App-write.ico" };
+      icons VIEW{ m_path + "App-xeyes.ico" };
+      icons IMPORT{ m_path + "App-warehause.ico" };
+      icons EXPORT{ m_path + "App-navigator.ico" };
+      icons PRINT{ m_path + "App-kjobviewer-printer.ico" };
+      icons PRINTPREVIEW{ m_path + "App-kde-print-fax.ico" };
+      icons PRINTSETUP{ m_path + "Action-file-quick-print.ico" };
+      icons PRINTPAGE{ m_path + "Action-frame-print.ico" };
+      /**/
+      icons CUT{ m_path + "Blue-Scissors.ico" };
+      common() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct Q_DECL_EXPORT user : public initial_directory
+   {
+      icons PASSWORD{ m_path + "password.png" }; //Common::PASSWORD;
+      icons MANAGER{ m_path + "login manager.png" }; //Common::LOGINMANAGER;
+      user() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct Q_DECL_EXPORT tools : public initial_directory
+   {
+      icons PREFERENCES{ m_path + "App-package-utilities.ico" };
+      tools() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   struct Q_DECL_EXPORT help : public initial_directory
+   {
+      icons INDEX{ m_path + "App-help-index.ico" };
+      icons HELPINDEX{ m_path + "help_index.png" };
+      help() = default;
+   };
+   //-----------------------------------------------------------------------------------------------//
+   template <typename base_t>
+      requires derived_from<base_t, initial_directory>
+   struct icons_impl : public base_t
+   {
+      using value_type = base_t;
+      using pointer = unique_ptr<icons_impl<value_type>>;
+      template<typename icon_t> concept is_filename = requires(icon_t const&& filename)
+      {
+         {
+            is_same_v<icon_t, unicodestring> || is_same_v<icon_t, string>
+         };
+      };
+      constexpr icons_impl() :base_t{}
       {
       }
-      template <typename IconFileName> QIcon const load(IconFileName const && filename)
+      icons const load(is_filename const&& filename)
       {
-         return QIcon{ unicodestring{"1%/%2"}.arg(m_path).arg(std::forward<icon_name_t>(filename)) };
+         return icons{ unicodestring{"1%/%2"}
+         .arg(value_type::m_path)
+            .arg(std::forward<icon_t>(filename)) };
       }
    };
    //-----------------------------------------------------------------------------------------------//
-   typedef icons_impl<icons::file> iconsfile_impl;
-   typedef icons_impl<icons::edit> iconsedit_impl;
-   typedef icons_impl<icons::common> iconscommon_impl;
-   typedef icons_impl<icons::help> iconshelp_impl;
-   typedef icons_impl<icons::style> iconsstyle_impl;
-   typedef icons_impl<icons::tools> iconstools_impl;
-   typedef icons_impl<icons::user>  iconsuser_impl;
-   typedef icons_impl<icons::window> iconswindow_impl;
+   using iconsfile_impl = icons_impl<file>;
+   using iconsedit_impl = icons_impl<edit>;
+   using iconscommon_impl = icons_impl<common>;
+   using iconshelp_impl = icons_impl<help>;
+   using iconsstyle_impl = icons_impl<style>;
+   using iconstools_impl = icons_impl<tools>;
+   using iconsuser_impl = icons_impl<user>;
+   using iconswindow_impl = icons_impl<window>;
    //-----------------------------------------------------------------------------------------------//
 }

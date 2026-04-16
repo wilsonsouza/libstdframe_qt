@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
 // Created by Wilson.Souza 2012, 2013, 2018
-// For Libbs Farma
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012, 2013
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026, 2013
 //
 // Last Updated: introduce new technical of c++14
 //-----------------------------------------------------------------------------------------------//
@@ -56,8 +56,8 @@ namespace std
       button * m_ok{ nullptr };
       button * m_cancel{ nullptr };
       button * m_help{ nullptr };
-      shared_ptr<icons_impl<icons::common>> m_iconslist{ new icons_impl<icons::common>{} };
-      shared_ptr<timer> m_timer{ nullptr };
+      unique_ptr<icons::iconscommon_impl> m_iconslist{ new icons::iconscommon_impl{} };
+      unique_ptr<timer> m_timer{ nullptr };
       unicodestring const HORIZONTAL_LAYOUT_BUTTONS_NAME{ "HORIZONTAL_BUTTONS_LAYOUT" };
    private:
       vertical_box * m_verticallay{ nullptr };

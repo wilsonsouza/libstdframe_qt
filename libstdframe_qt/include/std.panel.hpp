@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
 // Created by Wilson.Souza 2015, 2018
 //
-// Dedalus Prime
+// 2WW Engenharia de Sistemas
 // (c) 2015
 //-----------------------------------------------------------------------------------------------//
 #pragma once

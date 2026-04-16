@@ -1,7 +1,7 @@
 /**************************************************************************************************
 *
-* Copyright (c) 2013 Dedalus Prime. All Rights Reserveds
-* DEDALUS PRIME PROPRIETARY
+* Copyright (c) 2013 2WW Engenharia de Sistemas. All Rights Reserveds
+* 2WW Engenharia de Sistemas PROPRIETARY
 *
 * Created by Wilson.Souza
 *

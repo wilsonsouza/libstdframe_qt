@@ -5,10 +5,16 @@
 // For many platform
 //
 // 2WW Engenharia de Sistemas
-// (c) 2012, 2026
+// (c) 2012, 2026, 2015
 //-----------------------------------------------------------------------------------------------//
-#include <std.controls.hpp>
+#pragma once
+#include <std.mdichildwindow_impl.hpp>
 //-----------------------------------------------------------------------------------------------//
-using namespace std;
-//-----------------------------------------------------------------------------------------------//
-
+std::mdichildwindow_impl::mdichildwindow_impl(QWidget* owner,
+                                              unicodestring const& name,
+                                              Qt::WindowFlags) :
+   QMdiSubWindow{ owner, f },
+   task_group{}
+{
+   setObjectName(name);
+}

@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------------------------//
-// stdx.frame.x86 for Windows
+// stdx qt abstraction library for cpluplus
 // Dynamic library for QTxx
-// Created by Wilson.Souza 2012, 2018
+// Created by Wilson.Souza 2012, 2018, 2026
 //
 // WR Devinfo
 // (c) 2016

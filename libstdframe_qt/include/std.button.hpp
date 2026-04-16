@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------------------------//
-// dedaluslib.lib for Windows
+// lib-std-frame-qt abstraction framework
 //
-// Created by Wilson.Souza 2012, 2018
-// For Libbs Farma
+// Created by Wilson.Souza 2012, 2018, 2026
+// For many platform
 //
-// Dedalus Prime
-// (c) 2012
+// 2WW Engenharia de Sistemas
+// (c) 2012, 2026
 //-----------------------------------------------------------------------------------------------//
 #pragma once
 #pragma warning(disable:4275)
@@ -18,21 +18,12 @@ namespace std
    {
       Q_OBJECT
    public:
-      explicit button(QWidget * owner,
-                      unicodestring const & caption,
-                      QIcon const & icon_object,
-                      unicodestring const & name = unicodestring{},
-                      bool const enabled = false) :QPushButton{ icon_object, caption, owner }
-      {
-         setObjectName((name.empty()? caption: name));
-         this->setEnabled(bool{ enabled });
-         //
-         connect(this, &QPushButton::clicked, [this](bool checked_value)
-         {
-            dispatch_event(on_clicked, checked_value, this);
-         });
-      }
-      virtual ~button()
+      explicit button(QWidget* owner,
+                      unicodestring const& caption,
+                      QIcon const& icon_object,
+                      unicodestring const& name = unicodestring{},
+                      bool const enabled = false);
+      virtual ~button() override
       {
          disconnect();
       }

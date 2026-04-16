@@ -5,10 +5,17 @@
 // For many platform
 //
 // 2WW Engenharia de Sistemas
-// (c) 2012, 2026
+// (c) 2012, 2026, 2015
 //-----------------------------------------------------------------------------------------------//
-#include <std.controls.hpp>
+#pragma once
+#include <std.mainwindow_impl.hpp>
 //-----------------------------------------------------------------------------------------------//
-using namespace std;
-//-----------------------------------------------------------------------------------------------//
-
+std::implement::mainwindow::mainwindow(QWidget* owner,
+                                       unicodestring const& name,
+                                       Qt::WindowFlags f) :
+   QMainWindow{ owner, std::move(f) },
+   task_group{},
+   popup::pointer{ new popup{name} }
+{
+   setObjectName(name);
+}

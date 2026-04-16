@@ -36,14 +36,15 @@ using namespace Concurrency;
 namespace std
 {
    /**/
-   enum Command : int
+   enum class command : uint
    {
       IDDOK = 1,
       IDDCANCEL,
       IDDHELP
    };
+   using commands = set<command>;
    //-----------------------------------------------------------------------------------------------//
-   enum WMessages : int
+   enum class wmessages : int
    {
       WM_ICONSIZECHANGED = 1,
       WM_TOOLBUTTONSTYLECHANGED,
@@ -61,136 +62,147 @@ namespace std
       WM_TREEWIDGET_UPDATEITEMS,
       WM_LOADDATA
    };
+   using wmessages_queue = set<wmessages>;
+   //-----------------------------------------------------------------------------------------------//
+   namespace window
+   {
+      enum class mode : uint
+      {
+         NORMAL = 0x01af,
+         MAXIMIZED = 0x02df,
+         MINIMIZED = 0x04ef,
+         HIDE = 0x08ab,
+         FULLSCREEN = 0x8ac
+      };
+      using modes = set<mode>;
+      template<class value_t = mode> requires(is_same_v<value_t, mode>)
+         auto operator!= (value_t const& value, value_t const&)
+      {
+         return(value != mode::NORMAL ||
+                value != mode::MAXIMIZED ||
+                value != mode::MINIMIZED ||
+                value != mode::HIDE ||
+                value != mode::FULLSCREEN);
+      }
+
+      //window states
+      enum class state :uint
+      {
+         NOSTATE = 0x00000000,
+         MINIMIZED = 0x00000001,
+         MAXIMIZED = 0x00000002,
+         FULLSCREEN = 0x00000004,
+         ACTIVE = 0x00000008
+      };
+      using states = set<state>;
+      template<class states_t = state> requires(is_same_v<states_t, state>)
+         auto operator!= (states_t const& value, states_t const&)
+      {
+         return(value != state::NOSTATE ||
+                value != state::MINIMIZED ||
+                value != state::MAXIMIZED ||
+                value != state::FULLSCREEN ||
+                value != state::ACTIVE);
+      }
+      //window Modality
+      enum class modality : uint
+      {
+         NONMODAL = Qt::NonModal,
+         WINDOW_MODAL = Qt::WindowModal,
+         APPLICATION_MODAL = Qt::ApplicationModal
+      };
+      using modalities = set<modality>;
+      template<class modality_t = modality> requires(is_same_v<modality_t, modality>)
+         auto operator!= (modality_t const& value, modality_t const&)
+      {
+         return(value != modality::NONMODAL ||
+                value != modality::WINDOW_MODAL ||
+                value != modality::APPLICATION_MODAL);
+      }
+   }
    //-----------------------------------------------------------------------------------------------//
    namespace version
    {
       Q_DECL_EXPORT unicodestring const __cdecl get_string_version();
       Q_DECL_EXPORT uint32_t const __cdecl get_version();
    };
-   //-----------------------------------------------------------------------------------------------//
-   template< typename Iterator, typename Lambda,
-      typename enable_if<is_arithmetic<typename Iterator>::value, typename Iterator>::type = 0>
-      inline auto integral_find_if(typename Iterator first,
-                                   typename Iterator last,
-                                   typename Lambda lambda)
-   {
-      auto start = first;
-      //
-      for (; start != last; start++)
-      {
-         if (lambda(start))
-         {
-            return start;
-         }
-      }
-      return last;
-   }
-   //-----------------------------------------------------------------------------------------------//
-   template<typename Iterator, typename Lambda>
-   inline void for_each_loop(typename Iterator first, typename Iterator last, typename Lambda lambda)
-   {
-      auto start = first;
-      //
-      for (; start != last; start++)
-      {
-         lambda(*start);
-      }
-   }
-   //-----------------------------------------------------------------------------------------------//
-   template<typename Iterator, typename Lambda,
-      typename enable_if<is_arithmetic<typename Iterator>::value, typename Iterator>::type = 0>
-      inline auto for_each_integral(typename Iterator first,
-                                    typename Iterator last,
-                                    typename Lambda lambda)
-   {
-      auto start = first;
-      //
-      for (; start != last; start++)
-      {
-         lambda(start);
-      }
-   }
-   //-----------------------------------------------------------------------------------------------//
+   //-----------------------------------------------------------------------------------------------//   
    struct settings : public QSettings
    {
-      explicit settings(const unicodestring &organization,
-                        const unicodestring &application = unicodestring{}, QObject *parent = nullptr) :
+      explicit settings(const unicodestring& organization,
+                        const unicodestring& application = {},
+                        QObject* parent = nullptr) :
          QSettings{ organization, application, parent }
       {
       }
-      settings(Scope scope, const unicodestring &organization,
-               const unicodestring &application = unicodestring{}, QObject *parent = nullptr) :
+      settings(Scope scope,
+               const unicodestring& organization,
+               const unicodestring& application = {},
+               QObject* parent = nullptr) :
          QSettings{ scope, organization, application, parent }
       {
       }
-      settings(Format format, Scope scope, const unicodestring &organization,
-               const unicodestring &application = unicodestring(), QObject *parent = nullptr) :
+      settings(Format format,
+               Scope scope,
+               const unicodestring& organization,
+               const unicodestring& application = {},
+               QObject* parent = nullptr) :
          QSettings{ format, scope, organization, application, parent }
       {
       }
-      settings(const unicodestring &filename, Format format, QObject *parent = nullptr) :
+      settings(const unicodestring& filename,
+               Format format,
+               QObject* parent = nullptr) :
          QSettings{ filename, format, parent }
       {
       }
-      explicit settings(QObject *parent = nullptr) :QSettings{ parent }
+      explicit settings(QObject* parent = nullptr) :QSettings{ parent }
       {
       }
    };
    //-----------------------------------------------------------------------------------------------//
+   template<typename value_t>
    class libstdframe_exception : public exception
    {
    public:
-      explicit libstdframe_exception(unicodestring const & message) : exception{ message.toStdString().data() }
-      {
-      }
-      explicit libstdframe_exception(char const * message) :exception{ message }
+      explicit libstdframe_exception(value_t const& message) :
+         exception{ unicodestring{message}.toStdString().data() }
       {
       }
    };
    //-----------------------------------------------------------------------------------------------//
-   template<class Func, typename ...Args>
-   inline bool dispatch_event(typename Func && func, Args&&...args)
+   template<class Func, typename ...Args> 
+      requires(is_function_v<Func>)
+      inline bool dispatch_event(Func&& func, Args&&...args)
    {
-      static_exception(forward<typename Func>(func) == nullptr, "parameter func is null!");
-      static_exception(!is_function<typename Func>::value, "func parameter isn´t an function!");
-      return forward<typename Func>(func)(forward<Args>(args)...);
+      static_exception(forward<Func>(func) == nullptr, "parameter <func> is null!");
+      return forward<Func>(func)(forward<Args>(args)...);
    }
    //-----------------------------------------------------------------------------------------------//
    template<class TaskGroup, typename Func, typename ...Args>
-   inline auto dispatch_event_by_pplx(typename TaskGroup && thread_class,
-                                      typename Func && func,
+      requires(is_same_v<TaskGroup, task_group>&& is_function_v<Func>)
+   inline auto dispatch_event_by_pplx(TaskGroup&& thread_class,
+                                      Func&& func,
                                       Args&&...args)
    {
-      static_exception(!is_same<typename TaskGroup, task_group>::value, "Class isn´t task_group!");
-      static_exception(forward<typename TaskGroup>(thread_class) == nullptr, "invalid parameter thread_class!");
-      static_exception(forward<typename Func>(func) == nullptr, "parameter func is null!");
-      static_exception(!is_function<typename Func>::value, "func parameter isn´t an function!");
+      static_exception(forward<TaskGroup>(thread_class) == nullptr, "invalid parameter thread_class!");
+      static_exception(forward<Func>(func) == nullptr, "parameter func is null!");
       //
-      return forward<typename TaskGroup>(thread_class)->run_and_wait([&]()->auto
+      return forward<TaskGroup>(thread_class)->run_and_wait([&]()->auto
       {
-         return forward<typename Func>(func)(forward<Args>(args)...);
+         return forward<Func>(func)(forward<Args>(args)...);
       });
    }
    //-----------------------------------------------------------------------------------------------//
-   template< typename Value, typename Message,
-      typename enable_if<is_fundamental<typename Value>::value, typename bool>::type = 0>
-      inline bool static_exception(typename Value && value, typename Message && message)
+   template< typename Value, typename Message>
+      requires(is_fundamental_v<Value>)
+   inline bool static_exception(Value&& value, Message&& message)
    {
-      if (forward<typename Value>(value) == true)
+      if (forward<Value>(value) == true)
       {
-         throw libstdframe_exception{ forward<typename Message>(message) };
+         throw libstdframe_exception{ forward<Message>(message) };
       }
       return true;
-   }
-   //-----------------------------------------------------------------------------------------------//
-   template<class Source, class Func, typename ...Params>
-   inline auto invoke_method(typename Source *&& source, typename Func && func, Params&& ...params)
-   {
-      static_exception(forward<typename Source>(source) == nullptr, "parameter source is null!");
-      static_exception(forward<typename Func>(func) == nullptr, "parameter func is null!");
-      static_exception(!is_function<typename Func>::value, "func parameter isn´t an function!");
-      //
-      return forward<typename Source>(source)->forward<typename Func>(func)(forward<Params>(params)...);
    }
 }
 /*eof*/
